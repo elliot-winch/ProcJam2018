@@ -10,6 +10,7 @@ public class HexSurface : Renderable {
     //The number of "hex rings" from the center to the edge
     public int hexGridDist = 2;
 
+    //Should be sealed?
     protected override Mesh GenerateMesh()
     {
         Mesh m = new Mesh();
@@ -17,14 +18,8 @@ public class HexSurface : Renderable {
         var hexPositions = HexUtility.Spiral(hexGridDist);
 
         m.vertices = GenerateVertices(hexPositions);
+        m.normals = GenerateNormals(hexPositions, m.vertices);
         m.triangles = GenerateTriangles(hexGridDist);
-
-        m.normals = GenerateNormals(m.vertices);
-
-        foreach (var n in m.normals)
-        {
-            Debug.Log(n);
-        }
 
         return m;
     }
@@ -43,14 +38,13 @@ public class HexSurface : Renderable {
         return verts;
     }
 
-    protected virtual Vector3[] GenerateNormals(Vector3[] verts)
+    protected virtual Vector3[] GenerateNormals(List<Vector3Int> hexPositions, Vector3[] verts)
     {
         Vector3[] normals = new Vector3[verts.Length];
 
         for(int i = 0; i < normals.Length; i++)
         {
             normals[i] = Vector3.up;
-            Debug.Log(normals[i]);
         }
 
         return normals;

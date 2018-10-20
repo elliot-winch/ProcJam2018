@@ -3,8 +3,19 @@ using UnityEngine;
 
 public static class HexUtility
 {
+    
+
     #region Coord Pixel Convertions
-    public static Vector2 PixelFromCubeCoord(Vector3Int h, float size)
+    //The distance between any two neighbours
+    public static float DistanceBetweenNeighbours(float size = 1f)
+    {
+        var x = size * (3f / 2);
+        var y = size * (Mathf.Sqrt(3f) / 2f * + Mathf.Sqrt(3f));
+
+        return Mathf.Sqrt(x * x + y * y);
+    }
+
+    public static Vector2 PixelFromCubeCoord(Vector3Int h, float size = 1f)
     {
         var x = size * (3f / 2 * h.x);
         var y = size * (Mathf.Sqrt(3f) / 2f * h.x + Mathf.Sqrt(3f) * h.y);
@@ -76,6 +87,7 @@ public static class HexUtility
 
     public static Vector3Int Neighbour(Vector3Int hexPos, int dir, int dist = 1)
     {
+
         return new Vector3Int(hexPos.x + NeighbourDirections[dir].x * dist, hexPos.y + NeighbourDirections[dir].y * dist, hexPos.z + NeighbourDirections[dir].z * dist);
     }
     #endregion

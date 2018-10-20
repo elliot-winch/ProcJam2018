@@ -4,7 +4,6 @@ using UnityEngine;
 [CustomEditor(typeof(MeshFilter))]
 public class NormalsVisualizer : Editor
 {
-
     private Mesh mesh;
 
     void OnEnable()
