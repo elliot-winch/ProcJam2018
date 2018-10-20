@@ -6,17 +6,49 @@ public class Projectile : MonoBehaviour {
 
     private float TimeSinceCreation = 0.0f;
 
-    public Func<float> DamageFunction { get; set; }
-    public Func<float, Vector3> ResolvePosition { get; set; }
+
+    //make random later with UnityEngine.Random(-1.0f, 1.0f) on awake
+    private float trajectoryScalarX = 1.0f;
+    private float trajectoryScalarY = 1.0f;
+
+    private float distanceTravelled = 0.0f;
+    private Vector3? previousPosition = null;
+
+    public PGFDamageData DamageData { get; set; }
+    public PGFProjectileTrajectoryData TrajectoryData { get; set; }
 
     private void OnImpact(){
         //applies DamageFunction float to the object that takes the damage
-        var damage = DamageFunction();
+        float damage = CalculateDamageOnImpact();
+    }
+
+    private float CalculateDamageOnImpact() {
+
+        return DamageData.baseDamage + DamageData.damageDropOff * distanceTravelled;
     }
 
     private void FixedUpdate(){
         TimeSinceCreation += Time.fixedDeltaTime;
-        transform.position = ResolvePosition(TimeSinceCreation);
-        Debug.Log(DamageFunction());
+
+        if (previousPosition.HasValue) {
+            distanceTravelled += Vector3.Distance(previousPosition.Value, transform.position);
+        }
+
+        previousPosition = transform.position;
+
+        CalculateProjectileTrajectory();
+        //Debug.Log(CalculateDamageOnImpact());
     }
+
+    private void CalculateProjectileTrajectory()
+    {
+        var distanceThisFrame = Time.fixedDeltaTime * TrajectoryData.speed;
+        transform.position += distanceThisFrame * transform.forward;
+        if (distanceTravelled >= TrajectoryData.distanceBeforeSpread)
+        {
+            transform.position += transform.right * Mathf.Tan(trajectoryScalarX * TrajectoryData.spreadAngle);
+            transform.position += transform.up * Mathf.Tan(trajectoryScalarY * TrajectoryData.spreadAngle);
+        }
+    }
+
 }

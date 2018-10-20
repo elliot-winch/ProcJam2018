@@ -5,28 +5,54 @@ using System;
 
 public class PGF : MonoBehaviour
 {
+    private bool canFire = true;
 
+    public GameObject projectilePrefab;
     public Projectile Fire(Vector3 direction, Vector3 position, int ammoRemaining)
     {
-        var projectileObject = new GameObject()
+        if (canFire)
         {
-            name = "projectile", //tag = "projectile"
-        };
-        var projectileComponent = projectileObject.AddComponent<Projectile>();
-        //set projectile components
-        projectileComponent.DamageFunction = DamageFunction;
-        //we'll calculate the direction you're facing (first parameter) later, barrel's position
-        projectileComponent.ResolvePosition = ProjectileTrajectory(Vector3.zero, transform.position);
-
-        return projectileComponent;
+            var ProjectileObject = Instantiate(projectilePrefab);
+            var projectileComponent = ProjectileObject.GetComponent<Projectile>();
+            //set projectile components
+            projectileComponent.DamageData = DamageData;
+            //we'll calculate the direction you're facing (first parameter) later, barrel's position
+            projectileComponent.TrajectoryData = ProjectileTrajectoryData;
+            float r = GetWaitTime(ammoRemaining);
+            StartCoroutine(WaitForRateOfFire(r));
+            return projectileComponent;
+        }
+        else
+        {
+            Debug.Log("Waiting for Rate of Fire");
+            return null;
+        }
     }
+
+    IEnumerator WaitForRateOfFire(float waitTime)
+    {
+        canFire = false;
+        yield return new WaitForSeconds(waitTime);
+        canFire = true;
+    }
+
+    private float GetWaitTime(int ammoRemaining){
+        foreach(PGFBurstData x in RateOfFireData.ROFDataArr){
+            if ((ammoRemaining % x.n) == 0) 
+            {
+                return x.r;
+            }
+        }
+        return RateOfFireData.baseRate;
+    }
+
 
     // property of class, private variable public getter
     // not serializable, you need to call the getter
-    public Func<float> DamageFunction { get; set; }
+    public PGFDamageData DamageData { get; set; }
 
-    public Func<int, float> RateOfFireFunction { get; set; }
+    public PGFRateOfFireData RateOfFireData { get; set; }
 
                 //parameters      //return value
-    public Func<Vector3, Vector3, Func<float, Vector3>> ProjectileTrajectory {get; set;}
+    public PGFProjectileTrajectoryData ProjectileTrajectoryData {get; set;}
 }
