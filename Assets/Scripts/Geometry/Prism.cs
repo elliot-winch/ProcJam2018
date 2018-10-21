@@ -13,15 +13,22 @@ public class Prism : Renderable {
     [Header("Geometry")]
     [Range(3, 60)]
     public int vertCount = 6;
+    public Vector2 shear = Vector2.zero;
+    public Vector2 frustumScale = Vector2.one;
+    public float truncationAngle = 0f;
+    public float verticalSquash = 1f;
 
     [Header("Shape")]
     public FaceType faceType = FaceType.Flat;
+    public GeometryUtility.TopType topType = GeometryUtility.TopType.Flat;
     public float thickness = 0.5f;
-    public float size = 1f;
+    public float radius = 1f;
 
     [Header("Options")]
     public bool hideTop;
+    public bool showInsides;
     public List<int> hiddenSideFaces;
+
 
     protected override Mesh GenerateMesh()
     {
@@ -41,7 +48,7 @@ public class Prism : Renderable {
         //The number of geometric vertices for a prism is 2 * vertCount. We multiple by vertsPerPoint for normals
         Vector3[] vertices = new Vector3[2 * vertCount * normalsPerVert];
 
-        var corners = GeometryUtility.PointsAboutCircle(vertCount);
+        var corners = GeometryUtility.PointsAboutEllipse(vertCount, topType, verticalSquash);
 
         for(int i = 0; i < vertCount; i++)
         {
@@ -50,9 +57,11 @@ public class Prism : Renderable {
                 int k1 = (i * normalsPerVert) + j;
                 int k2 = k1 + (vertCount * normalsPerVert);
 
-                vertices[k1] = new Vector3(corners[i].x * size, 0f, corners[i].y * size);
+                vertices[k1] = new Vector3((corners[i].x) * radius, 0f, corners[i].y * radius);
 
-                vertices[k2] = new Vector3(corners[i].x * size, -thickness, corners[i].y * size);
+                float bottomVertHeight = Mathf.Tan(truncationAngle) * corners[i].x * radius;
+
+                vertices[k2] = new Vector3((corners[i].x + shear.x) * frustumScale.x * radius, -thickness - bottomVertHeight, (corners[i].y + shear.y) * frustumScale.y * radius);
             }
         }
 
@@ -73,7 +82,7 @@ public class Prism : Renderable {
             int bottomFaceEquivalent = (vertCount * normalsPerVert);
 
             normals[cornerVertIndex] = Vector3.up;
-            normals[cornerVertIndex + bottomFaceEquivalent] = Vector3.down;
+            normals[cornerVertIndex + bottomFaceEquivalent] = new Vector3(-Mathf.Sin(truncationAngle), -Mathf.Cos(truncationAngle), 0).normalized;
 
             int topLeft = cornerVertIndex + 1;
             int bottomLeft = topLeft + bottomFaceEquivalent;
@@ -94,14 +103,14 @@ public class Prism : Renderable {
 
             //if we have elected to hide this face, don't create triangles
             //else, do
-            if (hiddenSideFaces.Contains(i) == false)
+            if (hiddenSideFaces != null && hiddenSideFaces.Contains(i) == false)
             {
                 triangles.AddRange(fillSurface(sideFace, true));
             }
 
             if (faceType == FaceType.Flat)
             {
-                float angle = ((2f * Mathf.PI) * (i / (float)vertCount) + (Mathf.PI / vertCount));
+                float angle = (2f * Mathf.PI) * (i / (float)vertCount) + (Mathf.PI / vertCount) + (topType == GeometryUtility.TopType.Flat ? (Mathf.PI / vertCount) : 0f);
 
                 var circlePoint = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
@@ -122,6 +131,20 @@ public class Prism : Renderable {
                 normals[topLeft] = normalVec;
                 normals[bottomLeft] = normalVec;
             }
+        }
+
+        if (showInsides)
+        {
+            int[] insideTriangles = new int[triangles.Count];
+
+            for(int i = 0; i < triangles.Count; i+=3)
+            {
+                insideTriangles[i] = triangles[i];
+                insideTriangles[i + 1] = triangles[i + 2];
+                insideTriangles[i + 2] = triangles[i + 1];
+            }
+
+            triangles.AddRange(insideTriangles);
         }
 
         Mesh mesh = new Mesh();

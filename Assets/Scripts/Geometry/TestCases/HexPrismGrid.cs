@@ -26,7 +26,7 @@ public class HexPrismGrid : MonoBehaviour
 
             var prism = Instantiate(tile, new Vector3(pos.x, 0f, pos.y), Quaternion.identity);
 
-            prism.size = size;
+            prism.radius = size;
             prism.Render();
         }
     }
