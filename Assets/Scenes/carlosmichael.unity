@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb0b655896fa4304a5f6a01df7545bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: {fileID: 0}
+  description: {fileID: 68805027}
 --- !u!4 &648161940
 Transform:
   m_ObjectHideFlags: 0
@@ -572,7 +572,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2946aacd79f8b4065b879f0e3db40a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: {fileID: 68805027}
   pgfPrefab: {fileID: 1274791218806618, guid: 4df0b9ad95e5e4dc88186ecec217d6ba, type: 2}
 --- !u!4 &1916174406
 Transform:
