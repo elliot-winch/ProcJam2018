@@ -6,13 +6,10 @@ using TMPro;
 
 public class PGFFactory : MonoBehaviour{
 
-    public TextMeshProUGUI description;
     public static PGFFactory Instance { get; private set; }
-    UIText UIText;
     private void Awake()
     {
         Instance = this;
-        UIText = new UIText();
     }
 
     public GameObject pgfPrefab;
@@ -27,8 +24,6 @@ public class PGFFactory : MonoBehaviour{
         pgf.ProjectileTrajectoryData = CreateProjectileTrajectoryData();
         pgf.MetaData = CreateMetaData();
 
-
-        UIText.Write(gameObjectInstance, description);
         return pgf;
     }
 
