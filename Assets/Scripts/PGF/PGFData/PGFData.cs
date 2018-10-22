@@ -28,6 +28,7 @@ public class PGFRateOfFireData {
     public PGFBurstData[] ROFDataArr;
 }
 
+[System.Serializable]
 public struct PGFBurstData {
     public int n;//umberOfShotsInBurst
     public float r;//ateOfSecondsBetweenShots
@@ -39,4 +40,11 @@ public class PGFProjectileTrajectoryData
     public float speed;
     public float distanceBeforeSpread;
     public float spreadAngle;
+}
+
+[System.Serializable]
+public class PGFMetaData
+{
+    public string name;
+    public string type;
 }

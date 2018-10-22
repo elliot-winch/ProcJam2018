@@ -51,6 +51,9 @@ public class PGF : MonoBehaviour
     // not serializable, you need to call the getter
     public PGFDamageData DamageData { get; set; }
 
+    //metadata
+    public PGFMetaData MetaData { get; set; }
+
     public PGFRateOfFireData RateOfFireData { get; set; }
 
                 //parameters      //return value

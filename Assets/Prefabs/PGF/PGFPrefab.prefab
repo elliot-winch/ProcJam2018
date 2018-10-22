@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114607585592699010}
   m_Layer: 0
   m_Name: PGFPrefab
-  m_TagString: Untagged
+  m_TagString: Generated
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,3 +137,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d92ce256acfe40e2a86d593dc9686c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 1900665905453966, guid: 2d1925063adb54eeab1bed953e5252fc,
+    type: 2}
