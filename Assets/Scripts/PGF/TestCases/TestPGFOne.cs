@@ -5,6 +5,9 @@ using TMPro;
 public class TestPGFOne : MonoBehaviour {
 
     public TextMeshProUGUI description;
+
+    public TextMeshProUGUI ammo;
+
     PGF PGFInstance;
 	// Use this for initialization
     void Start () {

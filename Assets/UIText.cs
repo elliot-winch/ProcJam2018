@@ -27,4 +27,13 @@ public static class UIText {
         }
 
     }
+
+    public static void WriteAdd(string s, TextMeshProUGUI description) {
+        description.text += s;
+    }
+
+    public static void WriteReplace(string s, TextMeshProUGUI description)
+    {
+        description.text = s;
+    }
 }

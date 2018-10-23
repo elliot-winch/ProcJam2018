@@ -39,18 +39,15 @@ public class PGFFactory : MonoBehaviour{
 
     private PGFProjectileTrajectoryData CreateProjectileTrajectoryData() {
         return new PGFProjectileTrajectoryData(){
-            speed = 5.0f, distanceBeforeSpread = 0.0f, spreadAngle = Mathf.PI / 4.0f
+            speed = UnityEngine.Random.Range(1.0f, 100.0f), distanceBeforeSpread = UnityEngine.Random.Range(0.0f, 10.0f), spreadAngle = 0.0f
         };
     }
 
     private PGFMetaData CreateMetaData() {
         return new PGFMetaData()
         {
-            name = "TEST w RAND NUM " + UnityEngine.Random.Range(-1000.0f, 1000.0f), type = "shootyboy"
-            //TODO: roll the dice
-            speed = 1.0f,
-            distanceBeforeSpread = 5.0f,
-            spreadAngle = Mathf.PI / 4.0f
+            name = "NAME PLACEHOLDER", type = "shootyboy"
+
         };
     }
 
