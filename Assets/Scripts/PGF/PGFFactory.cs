@@ -6,15 +6,24 @@ using TMPro;
 
 public class PGFFactory : MonoBehaviour{
 
+    //Singleton
     public static PGFFactory Instance { get; private set; }
+
+    //Assign singleton
     private void Awake()
     {
         Instance = this;
     }
 
+    [Tooltip("The Prefab for any PGF")]
     public GameObject pgfPrefab;
 
+    /// <summary>
+    /// Creates a new PGF
+    /// </summary>
+    /// <returns></returns>
     public PGF CreatePGF() {
+        //Create the PGF
         var gameObjectInstance = Instantiate(pgfPrefab);
         PGF pgf = gameObjectInstance.GetComponent<PGF>();
 
@@ -29,7 +38,6 @@ public class PGFFactory : MonoBehaviour{
 
 
     private PGFProjectileTrajectoryData CreateProjectileTrajectoryData() {
-        //jesus
         return new PGFProjectileTrajectoryData(){
             speed = 5.0f, distanceBeforeSpread = 0.0f, spreadAngle = Mathf.PI / 4.0f
         };
@@ -39,6 +47,10 @@ public class PGFFactory : MonoBehaviour{
         return new PGFMetaData()
         {
             name = "TEST w RAND NUM " + UnityEngine.Random.Range(-1000.0f, 1000.0f), type = "shootyboy"
+            //TODO: roll the dice
+            speed = 1.0f,
+            distanceBeforeSpread = 5.0f,
+            spreadAngle = Mathf.PI / 4.0f
         };
     }
 
@@ -47,6 +59,7 @@ public class PGFFactory : MonoBehaviour{
         return new PGFDamageData(){
             baseDamage = UnityEngine.Random.Range(0.0f, 100.0f),
             damageDropOff = UnityEngine.Random.Range(-15.0f, 15.0f)
+
         };
     }
 
