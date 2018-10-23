@@ -15,6 +15,7 @@ public class PGF : MonoBehaviour
     public PGFDamageData DamageData { get; set; }
     public PGFRateOfFireData RateOfFireData { get; set; }
     public PGFProjectileTrajectoryData ProjectileTrajectoryData { get; set; }
+    public PGFMetaData MetaData { get; set; }
 
     public bool CanFire
     {
@@ -103,5 +104,6 @@ public class PGF : MonoBehaviour
         }
         return RateOfFireData.baseRate;
     }
+
     #endregion
 }
