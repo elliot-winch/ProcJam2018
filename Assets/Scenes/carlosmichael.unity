@@ -247,9 +247,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d8753bd9c01df4a57b5e33cdc0828cff, type: 2}
-  m_sharedMaterial: {fileID: 21988503686228618, guid: d8753bd9c01df4a57b5e33cdc0828cff,
-    type: 2}
+  m_fontAsset: {fileID: 0}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -273,8 +272,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -451,6 +450,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1277161618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1277161619}
+  m_Layer: 0
+  m_Name: StartPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1277161619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1277161618}
+  m_LocalRotation: {x: -0.012836383, y: 0.7353941, z: -0.011824352, w: 0.677415}
+  m_LocalPosition: {x: 13.7, y: -1.5, z: 20.54}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 94.7, z: -2}
 --- !u!1 &1683464818
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +600,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2946aacd79f8b4065b879f0e3db40a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pgfPrefab: {fileID: 1906540926030758, guid: f7a26e0e4047f0744a19538dfa47e7c7, type: 2}
+  pgfPrefab: {fileID: 0}
+  pgfStartTransform: {fileID: 1277161619}
 --- !u!4 &1916174406
 Transform:
   m_ObjectHideFlags: 0
@@ -643,7 +671,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Press P for new gun
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d8753bd9c01df4a57b5e33cdc0828cff, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 21988503686228618, guid: d8753bd9c01df4a57b5e33cdc0828cff,
     type: 2}
   m_fontSharedMaterials: []
