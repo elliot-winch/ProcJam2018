@@ -27,7 +27,7 @@ public class PGF : MonoBehaviour
     }
 
     //Used to control rate of fire
-    private bool waitingForROF = false;
+    private bool waitingForROF = true;
     
     /// <summary>
     /// Fire the PGF. Produces a projectile based on PGF Data
@@ -38,6 +38,7 @@ public class PGF : MonoBehaviour
     /// <returns></returns>
     public Projectile Fire(Vector3 direction, Vector3 position)
     {
+<<<<<<< HEAD
         if (CanFire)
         {
             //Spawn the projectile
@@ -46,12 +47,21 @@ public class PGF : MonoBehaviour
             projectileObject.transform.position = barrelTip.position;
             projectileObject.transform.forward = barrelTip.forward;
 
+=======
+        if (waitingForROF)
+        {
+
+            //Spawn the projectile
+            var projectileObject = Instantiate(projectilePrefab);
+            projectileObject.transform.position = barrelTip.position;
+>>>>>>> 71a16b376305702eabe72150917d8bc52314b2dc
             var projectileComponent = projectileObject.GetComponent<Projectile>();
 
             //set projectile data
             projectileComponent.Data = Data.projectile;
 
             //Controlling ROF
+<<<<<<< HEAD
             //CUrrent ammo is decremented before being sent to GetWaitTime to avoid the off by one error
             currentAmmo--;
             
@@ -63,6 +73,10 @@ public class PGF : MonoBehaviour
                 float waitTime = GetWaitTime(currentAmmo);
                 StartCoroutine(WaitForRateOfFire(waitTime));
             }
+=======
+            float waitTime = GetWaitTime(ammoRemaining);
+            StartCoroutine(WaitForRateOfFire(waitTime));
+>>>>>>> 71a16b376305702eabe72150917d8bc52314b2dc
 
             return projectileComponent;
         }
@@ -80,9 +94,9 @@ public class PGF : MonoBehaviour
     /// <returns></returns>
     IEnumerator WaitForRateOfFire(float waitTime)
     {
-        waitingForROF = true;
-        yield return new WaitForSeconds(waitTime);
         waitingForROF = false;
+        yield return new WaitForSeconds(waitTime);
+        waitingForROF = true;
     }
 
     /*

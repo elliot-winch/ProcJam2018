@@ -31,9 +31,23 @@ public class PGFFactory : MonoBehaviour{
 
         PGF pgf = newPGF.GetComponent<PGF>();
 
+<<<<<<< HEAD
         pgf.Data = new PGFData()
         {
             meta = CreateMetaData()
+=======
+    private PGFProjectileTrajectoryData CreateProjectileTrajectoryData() {
+        return new PGFProjectileTrajectoryData(){
+            speed = UnityEngine.Random.Range(1.0f, 100.0f), distanceBeforeSpread = UnityEngine.Random.Range(0.0f, 10.0f), spreadAngle = 0.0f
+        };
+    }
+
+    private PGFMetaData CreateMetaData() {
+        return new PGFMetaData()
+        {
+            name = "NAME PLACEHOLDER", type = "shootyboy"
+
+>>>>>>> 71a16b376305702eabe72150917d8bc52314b2dc
         };
 
         return pgf;

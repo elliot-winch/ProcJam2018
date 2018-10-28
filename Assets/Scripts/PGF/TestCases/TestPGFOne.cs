@@ -7,7 +7,18 @@ public class TestPGFOne : MonoBehaviour {
 
     public TextMeshProUGUI description;
 
+<<<<<<< HEAD
     private PGF currentPGF;
+=======
+    public TextMeshProUGUI ammo;
+
+    PGF PGFInstance;
+	// Use this for initialization
+    void Start () {
+        PGFInstance = PGFFactory.Instance.CreatePGF();
+
+        UIText.Write(PGFInstance, description);
+>>>>>>> 71a16b376305702eabe72150917d8bc52314b2dc
 
     void Start ()
     {
