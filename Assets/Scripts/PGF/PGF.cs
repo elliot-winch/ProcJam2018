@@ -12,10 +12,9 @@ public class PGF : MonoBehaviour
 
     //Data Properties
     //Generated and set by the factory
-    public PGFDamageData DamageData { get; set; }
-    public PGFRateOfFireData RateOfFireData { get; set; }
-    public PGFProjectileTrajectoryData ProjectileTrajectoryData { get; set; }
-    public PGFMetaData MetaData { get; set; }
+    public PGFData Data { get; set; }
+
+    private int currentAmmo; //Ammo remaining in the clip
 
     public bool CanFire
     {
@@ -23,7 +22,7 @@ public class PGF : MonoBehaviour
         {
             //Right now, a PGF being able to fire it
             //only determined by its ROF
-            return waitingForROF;
+            return waitingForROF == false;
         }
     }
 
@@ -37,27 +36,38 @@ public class PGF : MonoBehaviour
     /// <param name="position"></param>
     /// <param name="ammoRemaining"></param>
     /// <returns></returns>
-    public Projectile Fire(Vector3 direction, Vector3 position, int ammoRemaining)
+    public Projectile Fire(Vector3 direction, Vector3 position)
     {
-        if (waitingForROF)
+        if (CanFire)
         {
             //Spawn the projectile
             var projectileObject = Instantiate(projectilePrefab);
+
+            projectileObject.transform.position = barrelTip.position;
+            projectileObject.transform.forward = barrelTip.forward;
+
             var projectileComponent = projectileObject.GetComponent<Projectile>();
 
             //set projectile data
-            projectileComponent.DamageData = DamageData;
-            projectileComponent.TrajectoryData = ProjectileTrajectoryData;
+            projectileComponent.Data = Data.projectile;
 
             //Controlling ROF
-            float waitTime = GetWaitTime(ammoRemaining);
-            StartCoroutine(WaitForRateOfFire(waitTime));
+            //CUrrent ammo is decremented before being sent to GetWaitTime to avoid the off by one error
+            currentAmmo--;
+            
+            if(currentAmmo <= 0)
+            {
+                Reload();
+            } else
+            {
+                float waitTime = GetWaitTime(currentAmmo);
+                StartCoroutine(WaitForRateOfFire(waitTime));
+            }
 
             return projectileComponent;
         }
         else
         {
-            //Debug.Log("Waiting for Rate of Fire");
             return null;
         }
     }
@@ -96,14 +106,36 @@ public class PGF : MonoBehaviour
     /// <param name="ammoRemaining"></param>
     /// <returns></returns>
     private float GetWaitTime(int ammoRemaining){
-        foreach(PGFBurstData x in RateOfFireData.ROFDataArr){
-            if ((ammoRemaining % x.n) == 0) 
+        foreach(PGFBurstData x in Data.rateOfFire.burstData){
+            if ((ammoRemaining % x.n.Value) == 0) 
             {
-                return x.r;
+                return x.r.Value;
             }
         }
-        return RateOfFireData.baseRate;
+        return Data.rateOfFire.baseRate.Value;
     }
 
+    #endregion
+
+    #region Reloading
+    /// <summary>
+    /// Resets current ammo to max. TODO: remove ammo from some inventory??
+    /// </summary>
+    public void Reload()
+    {
+        StartCoroutine(ReloadCo());
+    }
+
+    private IEnumerator ReloadCo()
+    {
+        waitingForROF = true;
+
+        yield return new WaitForSeconds(Data.rateOfFire.reloadingData.r.Value);
+
+        //for now, we are assuming the Overwatch model of ammo - infinte with reloads
+        currentAmmo = (int)Data.rateOfFire.reloadingData.n.Value;
+
+        waitingForROF = false;
+    }
     #endregion
 }

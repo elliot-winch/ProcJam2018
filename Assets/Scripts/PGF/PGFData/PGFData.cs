@@ -1,48 +1,72 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
-using System;
 
-[System.Serializable]
-public class PGFData{
-
-    public PGFDamageData PGFDamageData;
-}
-
-[System.Serializable]
-public class PGFDamageData {
-
-    // baseDamage : -1 -> 1 (negative values mean healing)
-    public float baseDamage;
-
-    // damageDropOff : baseDamage * distanceTravelled
-    public float damageDropOff;
-	
-}
-
-[System.Serializable]
-public class PGFRateOfFireData {
-
-    //r0
-    public float baseRate;
-    public PGFBurstData[] ROFDataArr;
-}
-
-[System.Serializable]
-public struct PGFBurstData {
-    public int n;//umberOfShotsInBurst
-    public float r;//ateOfSecondsBetweenShots
-}
-
-[System.Serializable]
-public class PGFProjectileTrajectoryData
+public abstract class ScoreableData
 {
-    public float speed;
-    public float distanceBeforeSpread;
-    public float spreadAngle;
+    /// <summary>
+    /// Provides a value from 0 to 1 determining how 'good' this data is
+    /// </summary>
+    /// <returns></returns>
+    public abstract float CalculateScore();
 }
 
-[System.Serializable]
+[Serializable]
+public class PGFData : ScoreableData
+{
+    [SerializeField]
+    public PGFMetaData meta;
+    [SerializeField]
+    public PGFProjectileData projectile;
+    [SerializeField]
+    public PGFRateOfFireData rateOfFire;
+
+    //Weights should sum to one
+    private const float projectileScoreWeight = 0.5f;
+    private const float rateOfFireScoreWeight = 0.5f;
+
+    public PGFData()
+    {
+        this.projectile = new PGFProjectileData();
+        this.rateOfFire = new PGFRateOfFireData();
+    }
+
+    public override float CalculateScore()
+    {        
+        return projectile.CalculateScore() * projectileScoreWeight + rateOfFire.CalculateScore() * rateOfFireScoreWeight;
+    }
+}
+
+[Serializable]
+public class PGFProjectileData : ScoreableData
+{
+    [SerializeField]
+    public PGFImpactDamageData ImpactDamage;
+    [SerializeField]
+    public PGFAreaDamageData AreaDamage;
+    [SerializeField]
+    public PGFTrajectoryData Trajectory;
+
+    //Weights should sum to one
+    private const float impactScoreWeight = 0.33f;
+    private const float areaScoreWeight = 0.33f;
+    private const float trajectoryScoreWeight = 0.34f;
+
+    public PGFProjectileData()
+    {
+        this.ImpactDamage = new PGFImpactDamageData();
+        this.AreaDamage = new PGFAreaDamageData();
+        this.Trajectory = new PGFTrajectoryData();
+    }
+
+    public override float CalculateScore()
+    {
+        return ImpactDamage.CalculateScore() * impactScoreWeight
+            + AreaDamage.CalculateScore() * areaScoreWeight
+            + Trajectory.CalculateScore() * trajectoryScoreWeight;
+    }
+}
+
+[Serializable]
 public class PGFMetaData
 {
     public string name;

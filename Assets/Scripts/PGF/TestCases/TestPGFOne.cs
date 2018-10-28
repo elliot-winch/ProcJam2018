@@ -2,31 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+
 public class TestPGFOne : MonoBehaviour {
 
     public TextMeshProUGUI description;
-    PGF PGFInstance;
-	// Use this for initialization
-    void Start () {
-        PGFInstance = PGFFactory.Instance.CreatePGF();
 
-        UIText.Write(PGFInstance, description);
+    private PGF currentPGF;
 
+    void Start ()
+    {
+        GenerateNewPDF();
+
+        UIText.Write(currentPGF, description);
 	}
 
 
     // Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.P)){
-            Destroy(GameObject.FindGameObjectWithTag("Generated"));
-            foreach (GameObject x in GameObject.FindGameObjectsWithTag("Projectile")){
-                Destroy(x);
-            };
-            PGFInstance = PGFFactory.Instance.CreatePGF();
-            UIText.Write(PGFInstance, description);
+
+        //Generate new
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GenerateNewPDF();
         };
+
+        //If we have no pgf, return from here
+        if(currentPGF == null)
+        {
+            return;
+        }
+
+        //Fire
         if (Input.GetMouseButtonDown(0)){
-            PGFInstance.Fire(transform.forward, transform.position, 99);
+
+            currentPGF.Fire(transform.forward, transform.position);
+        }
+
+        //Reload
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            currentPGF.Reload();
         }
 	}
+
+    void GenerateNewPDF()
+    {
+        if(currentPGF != null)
+        {
+            Destroy(currentPGF);
+        }
+
+        currentPGF = PGFFactory.Instance.CreatePGF();
+
+        UIText.Write(currentPGF, description);
+    }
 }
