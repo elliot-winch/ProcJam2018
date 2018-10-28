@@ -8,6 +8,8 @@ public static class RandomUtility {
     {
         if(random == null) { random = new Random(); }
 
-        return (float)((random.NextDouble() + 1.0) / 2.0) * (max - min) + min;
+        float f = (float)(random.NextDouble());
+
+        return f * (max - min) + min;
     }
 }

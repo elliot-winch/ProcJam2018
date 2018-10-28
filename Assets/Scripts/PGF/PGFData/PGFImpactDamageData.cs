@@ -28,8 +28,11 @@ public class PGFImpactDamageData : ScoreableData
 
     public PGFImpactDamageData()
     {
+
+        float f = RandomUtility.RandFloat(MIN_IMPACT_DAMAGE, MAX_IMPACT_DAMAGE);
         //For now, using a no args constructor and poission distribution select a value
-        this.baseDamage = new LinScoredFloat(value: RandomUtility.RandFloat(MIN_IMPACT_DAMAGE, MAX_IMPACT_DAMAGE),min: MIN_IMPACT_DAMAGE,max: MAX_IMPACT_DAMAGE, idealValue: MAX_IMPACT_DAMAGE);
+        this.baseDamage = new LinScoredFloat(value: f, min: MIN_IMPACT_DAMAGE,max: MAX_IMPACT_DAMAGE, idealValue: MAX_IMPACT_DAMAGE);
+
         this.damageDropOff = new LinScoredFloat(RandomUtility.RandFloat(MIN_DROPOFF, MAX_DROPOFF), MIN_DROPOFF, MAX_DROPOFF, MIN_DROPOFF);
     }
 

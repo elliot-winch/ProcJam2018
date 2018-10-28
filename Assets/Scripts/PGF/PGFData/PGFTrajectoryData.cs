@@ -9,8 +9,8 @@ public class PGFTrajectoryData : ScoreableData
     private const float MAX_SPEED = 200f;
     private const float MIN_SPEED = 50f;
 
-    private const float MAX_SPREAD = Mathf.PI / 8.0f;
-    private const float MIN_SPREAD = -Mathf.PI / 8.0f;
+    private const float MAX_SPREAD = Mathf.PI / 4.0f;
+    private const float MIN_SPREAD = 0f;
 
     private const float MAX_DROPOFF = .5f;
     private const float MIN_DROPOFF = 0f;
@@ -42,7 +42,7 @@ public class PGFTrajectoryData : ScoreableData
     {
         this.maxInitialSpreadAngle = new LinScoredFloat(RandomUtility.RandFloat(MIN_SPREAD, MAX_SPREAD), MIN_SPREAD, MAX_SPREAD, 0f);
         this.initialSpeed = new LinScoredFloat(RandomUtility.RandFloat(MIN_SPEED, MAX_SPEED), MIN_SPEED, MAX_SPEED, MAX_SPEED);
-        this.dropOffRatio = new LinScoredFloat(RandomUtility.RandFloat(MIN_DROPOFF, MAX_DROPOFF), MAX_DROPOFF, MIN_DROPOFF, MIN_DROPOFF);
+        this.dropOffRatio = new LinScoredFloat(RandomUtility.RandFloat(MIN_DROPOFF, MAX_DROPOFF), MIN_DROPOFF, MAX_DROPOFF, MIN_DROPOFF);
     }
 
     public override float CalculateScore()

@@ -20,13 +20,19 @@ public class TestPGFOne : MonoBehaviour {
         {
             currentPGF = value;
             
-            onSetCurrentPGF.Invoke(value);
+            if(onSetCurrentPGF != null)
+            {
+                onSetCurrentPGF.Invoke(value);
+            }
         }
     }
 
-    public TextMeshProUGUI description;
-    private PGF currentPGF;
+    public TextMeshProUGUI gunName;
     public TextMeshProUGUI ammo;
+    public TextMeshProUGUI description;
+
+    private PGF currentPGF;
+
 
     private void Awake()
     {
@@ -36,8 +42,6 @@ public class TestPGFOne : MonoBehaviour {
     void Start ()
     {
         GenerateNewPGF();
-
-        UIText.Write(currentPGF, description);
 	}
 
 
@@ -83,5 +87,7 @@ public class TestPGFOne : MonoBehaviour {
         Current = PGFFactory.Instance.CreatePGF();
 
         UIText.Write(currentPGF, description);
+
+        gunName.text = Current.Data.meta.name;
     }
 }
