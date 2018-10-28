@@ -1,3 +1,4 @@
+"Assets/TextMesh Pro"
 *
 
 !Assets
@@ -8,3 +9,4 @@ Assets/TextMeshPro/**
 !ProjectSettings/**
 !.gitignore
 !README
+

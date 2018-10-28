@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 13091869}
   - component: {fileID: 13091868}
   - component: {fileID: 13091867}
+  - component: {fileID: 13091870}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -188,9 +189,21 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1683464819}
+  - {fileID: 1277161619}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &13091870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13091866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e678410c1b8e445c3b7c7858aaf1e873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &68805025
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 177, y: 227}
+  m_AnchoredPosition: {x: 130, y: 227}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &68805027
@@ -247,7 +260,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -272,8 +285,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 18.39
+  m_fontSizeBase: 18.39
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -472,11 +485,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1277161618}
   m_LocalRotation: {x: -0.012836383, y: 0.7353941, z: -0.011824352, w: 0.677415}
-  m_LocalPosition: {x: 13.7, y: -1.5, z: 20.54}
+  m_LocalPosition: {x: 13.7, y: -2.5, z: 30.54}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 13091869}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 94.7, z: -2}
 --- !u!1 &1683464818
 GameObject:
@@ -600,7 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2946aacd79f8b4065b879f0e3db40a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pgfPrefab: {fileID: 0}
+  pgfPrefab: {fileID: 1906540926030758, guid: f794ec9bb431241aba104cba59f1b51b, type: 2}
   pgfStartTransform: {fileID: 1277161619}
 --- !u!4 &1916174406
 Transform:
@@ -671,9 +684,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Press P for new gun
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: 21988503686228618, guid: d8753bd9c01df4a57b5e33cdc0828cff,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

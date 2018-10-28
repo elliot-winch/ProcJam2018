@@ -14,6 +14,7 @@ public class PGFAreaDamageData : ScoreableData
 
     private const float MAX_NUM_IMPACTS = 10f;
     private const float MIN_NUM_IMPACTS = 1f;
+
     #endregion
 
     #region Score Weights

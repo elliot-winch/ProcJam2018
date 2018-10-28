@@ -27,7 +27,7 @@ public class PGF : MonoBehaviour
     }
 
     //Used to control rate of fire
-    private bool waitingForROF = true;
+    private bool waitingForROF = false;
     
     /// <summary>
     /// Fire the PGF. Produces a projectile based on PGF Data
@@ -45,7 +45,9 @@ public class PGF : MonoBehaviour
             var projectileObject = Instantiate(projectilePrefab);
 
             projectileObject.transform.position = barrelTip.position;
+          
             projectileObject.transform.forward = barrelTip.forward;
+
 
             var projectileComponent = projectileObject.GetComponent<Projectile>();
 
@@ -81,9 +83,9 @@ public class PGF : MonoBehaviour
     /// <returns></returns>
     IEnumerator WaitForRateOfFire(float waitTime)
     {
-        waitingForROF = false;
-        yield return new WaitForSeconds(waitTime);
         waitingForROF = true;
+        yield return new WaitForSeconds(waitTime);
+        waitingForROF = false;
     }
 
     /*

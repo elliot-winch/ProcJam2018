@@ -28,9 +28,12 @@ public class PGFFactory : MonoBehaviour{
         {
             newPGF.transform.position = pgfStartTransform.position;
             newPGF.transform.forward = pgfStartTransform.forward;
+            newPGF.transform.rotation = pgfStartTransform.rotation;
         }
 
         PGF pgf = newPGF.GetComponent<PGF>();
+
+        pgf.transform.SetParent(Camera.main.transform);
 
         pgf.Data = new PGFData()
         {
