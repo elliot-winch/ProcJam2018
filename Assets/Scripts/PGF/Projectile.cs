@@ -75,6 +75,8 @@ public class Projectile : MonoBehaviour {
         float trajectoryScalarX = RandomUtility.RandFloat(-1f, 1f);
         float trajectoryScalarY = RandomUtility.RandFloat(-1f, 1f);
 
+        Debug.Log(trajectoryScalarX + " " + trajectoryScalarY);
+
         Vector3 v = transform.forward;
 
         v += transform.right * Mathf.Tan(trajectoryScalarX * Data.Trajectory.maxInitialSpreadAngle.Value);

@@ -9,7 +9,16 @@ public class PGFInputSlider : MonoBehaviour {
     public enum PGFDataField
     {
         ImpactDamage,
-        ImpactDamageDropoff
+        ImpactDamageDropoff,
+        AreaDamage,
+        BlastRadius,
+        ImpactsToDetonation,
+        InitialSpeed,
+        SpreadAngle,
+        Dropoff,
+        RateOfFire,
+        AmmoCapacity,
+        ReloadTime
     }
 
     public PGFDataField field;
@@ -17,19 +26,29 @@ public class PGFInputSlider : MonoBehaviour {
     public TextMeshProUGUI text;
 
     private LinScoredFloat scoredFloat;
+    private LinScoredFloat ScoredFloat
+    {
+        get
+        {
+            return scoredFloat;
+        }
+        set
+        {
+            scoredFloat = value;
+            this.slider.value = Mathf.Lerp(scoredFloat.Min, scoredFloat.Max, scoredFloat.Value);
+        }
+    }
 
     private void Start()
     {
-        TestPGFOne.Instance.onSetCurrentPGF.AddListener((pgf) =>
+        TestPGFOne.Instance.onSetCurrentPGF += (pgf) =>
         {
-            this.scoredFloat = GetPGFValue(TestPGFOne.Instance.Current);
-
-           
-        });
+            this.ScoredFloat = GetPGFValue(pgf);
+        };
 
         if(TestPGFOne.Instance.Current != null)
         {
-            this.scoredFloat = GetPGFValue(TestPGFOne.Instance.Current);
+            this.ScoredFloat = GetPGFValue(TestPGFOne.Instance.Current);
         }
     }
 
@@ -42,6 +61,24 @@ public class PGFInputSlider : MonoBehaviour {
                 return pgf.Data.projectile.ImpactDamage.baseDamage;
             case PGFDataField.ImpactDamageDropoff:
                 return pgf.Data.projectile.ImpactDamage.damageDropOff;
+            case PGFDataField.AreaDamage:
+                return pgf.Data.projectile.AreaDamage.maxDamage;
+            case PGFDataField.BlastRadius:
+                return pgf.Data.projectile.AreaDamage.maxBlastRange;
+            case PGFDataField.ImpactsToDetonation:
+                return pgf.Data.projectile.AreaDamage.numImpactsToDetonate;
+            case PGFDataField.SpreadAngle:
+                return pgf.Data.projectile.Trajectory.maxInitialSpreadAngle;
+            case PGFDataField.InitialSpeed:
+                return pgf.Data.projectile.Trajectory.initialSpeed;
+            case PGFDataField.Dropoff:
+                return pgf.Data.projectile.Trajectory.dropOffRatio;
+            case PGFDataField.RateOfFire:
+                return pgf.Data.rateOfFire.baseRate;
+            case PGFDataField.AmmoCapacity:
+                return pgf.Data.rateOfFire.reloadingData.n;
+            case PGFDataField.ReloadTime:
+                return pgf.Data.rateOfFire.reloadingData.r;
             default:
                 return null;
         }

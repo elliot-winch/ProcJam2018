@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,7 +8,7 @@ public class TestPGFOne : MonoBehaviour {
 
     public static TestPGFOne Instance { get; private set; }
 
-    public UnityEvent<PGF> onSetCurrentPGF;
+    public Action<PGF> onSetCurrentPGF;
 
     public PGF Current
     {
@@ -19,7 +19,7 @@ public class TestPGFOne : MonoBehaviour {
         private set
         {
             currentPGF = value;
-
+            
             onSetCurrentPGF.Invoke(value);
         }
     }
@@ -27,6 +27,11 @@ public class TestPGFOne : MonoBehaviour {
     public TextMeshProUGUI description;
     private PGF currentPGF;
     public TextMeshProUGUI ammo;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start ()
     {
@@ -68,14 +73,14 @@ public class TestPGFOne : MonoBehaviour {
     {
         if(currentPGF != null)
         {
-            Destroy(GameObject.FindGameObjectWithTag("Generated"));
+            Destroy(currentPGF);
         }
         foreach (GameObject x in GameObject.FindGameObjectsWithTag("Projectile"))
         {
             Destroy(x);
         };
 
-        currentPGF = PGFFactory.Instance.CreatePGF();
+        Current = PGFFactory.Instance.CreatePGF();
 
         UIText.Write(currentPGF, description);
     }

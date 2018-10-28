@@ -18,11 +18,14 @@ public class LinScoredFloat : IComparable
         set
         {
             this.value = value;
+
+            CalcScore();
         }
     }
 
     public float Min { get; private set; }
     public float Max { get; private set; }
+    public float Ideal { get; private set; }
     public float Score { get; private set; }
 
     public LinScoredFloat(float value, float min, float max, float idealValue)
@@ -31,12 +34,19 @@ public class LinScoredFloat : IComparable
 
         this.Min = min;
         this.Max = max;
+        this.Ideal = idealValue;
+
+        CalcScore();
+    }
+
+    private void CalcScore()
+    {
 
         //The score is calculated by:
         //1) Find the larger distance between ideal and min and max and ideal.
         //2) Calculate the gradient for x0 = ideal, x1= min / max (dep. on step 1), y0 = 0, y1 = 1
         //3) Multiply by the disntance the value is from the ideal (i.e. use the gradient to give a y for some x)
-        this.Score = Mathf.Abs(value - idealValue) / Mathf.Max(idealValue - min, max - idealValue);
+        this.Score = Mathf.Abs(value - this.Ideal) / Mathf.Max(this.Ideal - this.Min, this.Min - this.Ideal);
     }
 
     public int CompareTo(object obj)
