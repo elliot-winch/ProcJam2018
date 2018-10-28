@@ -13,7 +13,7 @@ public class TestPGFOne : MonoBehaviour {
     {
         GenerateNewPGF();
 
-        UIText.Write(currentPGF, description);
+        //UIText.Write(currentPGF, description);
 	}
 
 
@@ -34,7 +34,7 @@ public class TestPGFOne : MonoBehaviour {
 
         //Fire
         if (Input.GetMouseButtonDown(0)){
-
+            Debug.Log("FIRE IN THE HOLE");
             currentPGF.Fire(transform.forward, transform.position);
         }
 
@@ -49,8 +49,12 @@ public class TestPGFOne : MonoBehaviour {
     {
         if(currentPGF != null)
         {
-            Destroy(currentPGF);
+            Destroy(GameObject.FindGameObjectWithTag("Generated"));
         }
+        foreach (GameObject x in GameObject.FindGameObjectsWithTag("Projectile"))
+        {
+            Destroy(x);
+        };
 
         currentPGF = PGFFactory.Instance.CreatePGF();
 

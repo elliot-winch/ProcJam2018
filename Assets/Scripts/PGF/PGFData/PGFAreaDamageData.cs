@@ -15,6 +15,8 @@ public class PGFAreaDamageData : ScoreableData
     private const float MAX_NUM_IMPACTS = 10f;
     private const float MIN_NUM_IMPACTS = 1f;
 
+
+    //get rid of these, calculate range based on Vo and G, 
     private const float MAX_TIME_TO_DETONATE = 10F;
     private const float IDEAL_TIME_TO_DETONATE = 3F;
     private const float MIN_TIME_TO_DETONATE = 1F;
