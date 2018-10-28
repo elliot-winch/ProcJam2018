@@ -1,19 +1,19 @@
 ﻿using System;
-
+using UnityEngine;
 
 [Serializable]
 public class PGFTrajectoryData : ScoreableData
 {
     #region Defintions
     #region Limits
-    private const float MAX_SPEED = 100f;
-    private const float MIN_SPEED = 1f;
+    private const float MAX_SPEED = 200f;
+    private const float MIN_SPEED = 50f;
 
-    private const float MAX_SPREAD = 1f;
-    private const float MIN_SPREAD = 0.01f;
+    private const float MAX_SPREAD = Mathf.PI / 8.0f;
+    private const float MIN_SPREAD = -Mathf.PI / 8.0f;
 
-    private const float MAX_DROPOFF = 10f;
-    private const float MIN_DROPOFF = 1f;
+    private const float MAX_DROPOFF = .5f;
+    private const float MIN_DROPOFF = 0f;
     #endregion
 
     #region Score Weights
@@ -40,7 +40,7 @@ public class PGFTrajectoryData : ScoreableData
 
     public PGFTrajectoryData()
     {
-        this.maxInitialSpreadAngle = new LinScoredFloat(RandomUtility.RandFloat(MIN_SPREAD, MAX_SPREAD), MIN_SPREAD, MAX_SPREAD, MAX_SPREAD);
+        this.maxInitialSpreadAngle = new LinScoredFloat(RandomUtility.RandFloat(MIN_SPREAD, MAX_SPREAD), MIN_SPREAD, MAX_SPREAD, 0f);
         this.initialSpeed = new LinScoredFloat(RandomUtility.RandFloat(MIN_SPEED, MAX_SPEED), MIN_SPEED, MAX_SPEED, MAX_SPEED);
         this.dropOffRatio = new LinScoredFloat(RandomUtility.RandFloat(MIN_DROPOFF, MAX_DROPOFF), MAX_DROPOFF, MIN_DROPOFF, MIN_DROPOFF);
     }

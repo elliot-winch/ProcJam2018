@@ -6,28 +6,24 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
+    m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1900665905453966}
-  m_IsPrefabParent: 0
---- !u!1 &1900665905453966
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1891098023551580}
+  m_IsPrefabAsset: 1
+--- !u!1 &1891098023551580
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
-  - component: {fileID: 4883979355246898}
-  - component: {fileID: 33640680619435956}
-  - component: {fileID: 23224615314096600}
-  - component: {fileID: 135625973944083466}
-  - component: {fileID: 114522731720633734}
-  - component: {fileID: 54144703863008288}
+  - component: {fileID: 4967660271700700}
+  - component: {fileID: 33106650631796282}
+  - component: {fileID: 23365773833989526}
+  - component: {fileID: 135187044961755370}
+  - component: {fileID: 114391428519135244}
+  - component: {fileID: 54180254037840218}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Projectile
@@ -35,25 +31,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4883979355246898
+--- !u!4 &4967660271700700
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1900665905453966}
+  m_GameObject: {fileID: 1891098023551580}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23224615314096600
+--- !u!23 &23365773833989526
 MeshRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1900665905453966}
+  m_GameObject: {fileID: 1891098023551580}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -83,19 +79,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33640680619435956
+--- !u!33 &33106650631796282
 MeshFilter:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1900665905453966}
+  m_GameObject: {fileID: 1891098023551580}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54144703863008288
+--- !u!54 &54180254037840218
 Rigidbody:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1900665905453966}
+  m_GameObject: {fileID: 1891098023551580}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -105,23 +101,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114522731720633734
+--- !u!114 &114391428519135244
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1900665905453966}
+  m_GameObject: {fileID: 1891098023551580}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75b3c8e09980442d086e280777e387b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &135625973944083466
+--- !u!135 &135187044961755370
 SphereCollider:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1900665905453966}
+  m_GameObject: {fileID: 1891098023551580}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

@@ -39,7 +39,8 @@ public class Projectile : MonoBehaviour {
         //When the prjectile stops moving, explode
         if(rb.velocity.magnitude < minSpeedBeforeDetonation)
         {
-            Explode();
+            //Debug.Log(rb.velocity.magnitude);
+            //Explode();
         }
 
         //Frame admin
@@ -55,7 +56,7 @@ public class Projectile : MonoBehaviour {
         previousPosition = transform.position;
     }
 
-    private void OnCollisionEnter(Collision collision)
+   private void OnCollisionEnter(Collision collision)
     {
         numberOfCollisions++;
 
