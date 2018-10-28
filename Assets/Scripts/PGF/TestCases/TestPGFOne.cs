@@ -13,7 +13,7 @@ public class TestPGFOne : MonoBehaviour {
     {
         GenerateNewPGF();
 
-        //UIText.Write(currentPGF, description);
+        UIText.Write(currentPGF, description);
 	}
 
 
