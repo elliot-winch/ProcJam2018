@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Generated
   - Projectile
+  - Target
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
+  - NoLight
   - 
   - 
   - 

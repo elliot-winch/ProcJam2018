@@ -35,7 +35,11 @@ public class PGFInputSlider : MonoBehaviour {
         set
         {
             scoredFloat = value;
-            this.slider.value = Mathf.Lerp(scoredFloat.Min, scoredFloat.Max, scoredFloat.Value);
+
+            this.slider.minValue = scoredFloat.Min;
+            this.slider.maxValue = scoredFloat.Max;
+            this.slider.value = scoredFloat.Value;
+
         }
     }
 
@@ -54,9 +58,9 @@ public class PGFInputSlider : MonoBehaviour {
 
     public LinScoredFloat GetPGFValue(PGF pgf)
     {
-
         switch (field)
         {
+
             case PGFDataField.ImpactDamage:
                 return pgf.Data.projectile.ImpactDamage.baseDamage;
             case PGFDataField.ImpactDamageDropoff:
@@ -86,13 +90,13 @@ public class PGFInputSlider : MonoBehaviour {
 
     public void SetPGFValue(float newValue)
     {
-        scoredFloat.Value = Mathf.Lerp(scoredFloat.Min, scoredFloat.Max, newValue);
+        scoredFloat.Value = newValue;
 
         UpdateUIText();
     }
 
     public void UpdateUIText()
     {
-        text.text = string.Format("{0}: Value: {1}, Min: {2}, Max: {3}, Score : {4}", this.field.ToString(), this.scoredFloat.Value, this.scoredFloat.Min, this.scoredFloat.Max, this.scoredFloat.Score);
+        text.text = this.field.ToString() + this.scoredFloat.ToString();
     }
 }

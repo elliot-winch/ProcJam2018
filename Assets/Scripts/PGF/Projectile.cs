@@ -18,30 +18,46 @@ public class Projectile : MonoBehaviour {
     Rigidbody rb;
 
     //Data Properties
-    public PGFProjectileData Data { get; set; }
+    private PGFProjectileData data;
+    public PGFProjectileData Data {
+        get
+        {
+            return data;
+        }
+        set
+        {
+            data = value;
+
+            GetComponent<MeshRenderer>().enabled = true;
+
+            ApplyStartingTrajectory();
+        }
+    }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-    }
 
-    private void Start()
-    {
-        //Motion
-        ApplyStartingTrajectory();
+        GetComponent<MeshRenderer>().enabled = false;
     }
 
     private void FixedUpdate()
     {
+        if(data == null)
+        {
+            //not ready to start moving
+            return;
+        }
+
         //Motion
         AddAdditionalForces(timeSinceCreation);
 
         //When the prjectile stops moving, explode
-        if(rb.velocity.magnitude < minSpeedBeforeDetonation)
-        {
+        //if(rb.velocity.magnitude < minSpeedBeforeDetonation)
+        //{
             //Debug.Log(rb.velocity.magnitude);
             //Explode();
-        }
+        //}
 
         //Frame admin
         //Record travel time
@@ -80,8 +96,8 @@ public class Projectile : MonoBehaviour {
 
         Vector3 v = transform.forward;
 
-        v += transform.right * Mathf.Tan(trajectoryScalarX * Data.Trajectory.maxInitialSpreadAngle.Value);
-        v += transform.up * Mathf.Tan(trajectoryScalarY * Data.Trajectory.maxInitialSpreadAngle.Value);
+        v += transform.right * Mathf.Tan(trajectoryScalarX) * Data.Trajectory.maxInitialSpreadAngle.Value;
+        v += transform.up * Mathf.Tan(trajectoryScalarY) * Data.Trajectory.maxInitialSpreadAngle.Value;
 
         v = v.normalized * Data.Trajectory.initialSpeed.Value;
 

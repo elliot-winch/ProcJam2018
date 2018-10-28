@@ -47,7 +47,7 @@ public class PGFFactory : MonoBehaviour{
         private PGFMetaData CreateMetaData() {
         return new PGFMetaData()
         {
-            name = "NAME PLACEHOLDER",
+            name = PGFRandomNames.GenerateName(),
             type = "shootyboy"
         };
     }
