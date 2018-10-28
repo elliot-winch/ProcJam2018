@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using TMPro;
+﻿using UnityEngine;
 
 public class PGFFactory : MonoBehaviour{
 
@@ -17,6 +13,7 @@ public class PGFFactory : MonoBehaviour{
 
     [Tooltip("The Prefab for any PGF")]
     public GameObject pgfPrefab;
+    public Transform pgfStartTransform;
 
     /// <summary>
     /// Creates a new PGF
@@ -24,19 +21,21 @@ public class PGFFactory : MonoBehaviour{
     /// <returns></returns>
     public PGF CreatePGF() {
         //Create the PGF
-        var gameObjectInstance = Instantiate(pgfPrefab);
-        PGF pgf = gameObjectInstance.GetComponent<PGF>();
+        var newPGF = Instantiate(pgfPrefab);
 
-        //initialize by calling the generation
-        pgf.DamageData = CreateDamage();
-        pgf.RateOfFireData = CreateRateOfFire();
-        pgf.ProjectileTrajectoryData = CreateProjectileTrajectoryData();
-        pgf.MetaData = CreateMetaData();
+        if(newPGF != null)
+        {
+            newPGF.transform.position = pgfStartTransform.position;
+            newPGF.transform.forward = pgfStartTransform.forward;
+        }
 
-        return pgf;
-    }
+        PGF pgf = newPGF.GetComponent<PGF>();
 
-
+<<<<<<< HEAD
+        pgf.Data = new PGFData()
+        {
+            meta = CreateMetaData()
+=======
     private PGFProjectileTrajectoryData CreateProjectileTrajectoryData() {
         return new PGFProjectileTrajectoryData(){
             speed = UnityEngine.Random.Range(1.0f, 100.0f), distanceBeforeSpread = UnityEngine.Random.Range(0.0f, 10.0f), spreadAngle = 0.0f
@@ -48,29 +47,19 @@ public class PGFFactory : MonoBehaviour{
         {
             name = "NAME PLACEHOLDER", type = "shootyboy"
 
+>>>>>>> 71a16b376305702eabe72150917d8bc52314b2dc
         };
+
+        return pgf;
     }
 
-    private PGFDamageData CreateDamage(){
-
-        return new PGFDamageData(){
-            baseDamage = UnityEngine.Random.Range(0.0f, 100.0f),
-            damageDropOff = UnityEngine.Random.Range(-15.0f, 15.0f)
-
-        };
-    }
-
-    private PGFRateOfFireData CreateRateOfFire(){
-
-        return new PGFRateOfFireData()
+    private PGFMetaData CreateMetaData() {
+        return new PGFMetaData()
         {
-            baseRate = UnityEngine.Random.Range(1.0f, 2.0f),
-            ROFDataArr = new PGFBurstData[] {
-                new PGFBurstData (){
-                    n = 3,
-                    r = 1,
-                }
-            }
+            //Any
+            name = "TEST w RAND NUM " + RandomUtility.RandFloat(-1000.0f, 1000.0f),
+            //Any
+            type = "shootyboy"
         };
     }
 }
