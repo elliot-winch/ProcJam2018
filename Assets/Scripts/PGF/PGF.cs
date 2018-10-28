@@ -38,7 +38,7 @@ public class PGF : MonoBehaviour
     /// <returns></returns>
     public Projectile Fire(Vector3 direction, Vector3 position)
     {
-<<<<<<< HEAD
+
         if (CanFire)
         {
             //Spawn the projectile
@@ -47,37 +47,24 @@ public class PGF : MonoBehaviour
             projectileObject.transform.position = barrelTip.position;
             projectileObject.transform.forward = barrelTip.forward;
 
-=======
-        if (waitingForROF)
-        {
-
-            //Spawn the projectile
-            var projectileObject = Instantiate(projectilePrefab);
-            projectileObject.transform.position = barrelTip.position;
->>>>>>> 71a16b376305702eabe72150917d8bc52314b2dc
             var projectileComponent = projectileObject.GetComponent<Projectile>();
 
             //set projectile data
             projectileComponent.Data = Data.projectile;
 
             //Controlling ROF
-<<<<<<< HEAD
             //CUrrent ammo is decremented before being sent to GetWaitTime to avoid the off by one error
             currentAmmo--;
-            
-            if(currentAmmo <= 0)
+
+            if (currentAmmo <= 0)
             {
                 Reload();
-            } else
+            }
+            else
             {
                 float waitTime = GetWaitTime(currentAmmo);
                 StartCoroutine(WaitForRateOfFire(waitTime));
             }
-=======
-            float waitTime = GetWaitTime(ammoRemaining);
-            StartCoroutine(WaitForRateOfFire(waitTime));
->>>>>>> 71a16b376305702eabe72150917d8bc52314b2dc
-
             return projectileComponent;
         }
         else

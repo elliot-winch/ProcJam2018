@@ -6,23 +6,12 @@ using TMPro;
 public class TestPGFOne : MonoBehaviour {
 
     public TextMeshProUGUI description;
-
-<<<<<<< HEAD
     private PGF currentPGF;
-=======
     public TextMeshProUGUI ammo;
-
-    PGF PGFInstance;
-	// Use this for initialization
-    void Start () {
-        PGFInstance = PGFFactory.Instance.CreatePGF();
-
-        UIText.Write(PGFInstance, description);
->>>>>>> 71a16b376305702eabe72150917d8bc52314b2dc
 
     void Start ()
     {
-        GenerateNewPDF();
+        GenerateNewPGF();
 
         UIText.Write(currentPGF, description);
 	}
@@ -34,7 +23,7 @@ public class TestPGFOne : MonoBehaviour {
         //Generate new
         if (Input.GetKeyDown(KeyCode.P))
         {
-            GenerateNewPDF();
+            GenerateNewPGF();
         };
 
         //If we have no pgf, return from here
@@ -56,7 +45,7 @@ public class TestPGFOne : MonoBehaviour {
         }
 	}
 
-    void GenerateNewPDF()
+    void GenerateNewPGF()
     {
         if(currentPGF != null)
         {
