@@ -5,6 +5,16 @@ using TMPro;
 
 public class TestPGFOne : MonoBehaviour {
 
+    public static TestPGFOne Instance { get; private set; }
+
+    public PGF Current
+    {
+        get
+        {
+            return currentPGF;
+        }
+    }
+
     public TextMeshProUGUI description;
     private PGF currentPGF;
     public TextMeshProUGUI ammo;
