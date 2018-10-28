@@ -9,29 +9,38 @@ public class PGFInputSlider : MonoBehaviour {
     public enum PGFDataField
     {
         ImpactDamage,
-        ImpactDropoff
+        ImpactDamageDropoff
     }
 
     public PGFDataField field;
     public Slider slider;
-    public TextMeshPro text;
+    public TextMeshProUGUI text;
 
     private LinScoredFloat scoredFloat;
 
     private void Start()
     {
-        this.scoredFloat = GetPGFValue();
+        TestPGFOne.Instance.onSetCurrentPGF.AddListener((pgf) =>
+        {
+            this.scoredFloat = GetPGFValue(TestPGFOne.Instance.Current);
+
+           
+        });
+
+        if(TestPGFOne.Instance.Current != null)
+        {
+            this.scoredFloat = GetPGFValue(TestPGFOne.Instance.Current);
+        }
     }
 
-    public LinScoredFloat GetPGFValue()
+    public LinScoredFloat GetPGFValue(PGF pgf)
     {
-        var pgf = TestPGFOne.Instance.Current;
 
         switch (field)
         {
             case PGFDataField.ImpactDamage:
                 return pgf.Data.projectile.ImpactDamage.baseDamage;
-            case PGFDataField.ImpactDropoff:
+            case PGFDataField.ImpactDamageDropoff:
                 return pgf.Data.projectile.ImpactDamage.damageDropOff;
             default:
                 return null;
@@ -42,11 +51,11 @@ public class PGFInputSlider : MonoBehaviour {
     {
         scoredFloat.Value = Mathf.Lerp(scoredFloat.Min, scoredFloat.Max, newValue);
 
-        text.text = UIString();
+        UpdateUIText();
     }
 
-    public string UIString()
+    public void UpdateUIText()
     {
-        return string.Format("", );
+        text.text = string.Format("{0}: Value: {1}, Min: {2}, Max: {3}, Score : {4}", this.field.ToString(), this.scoredFloat.Value, this.scoredFloat.Min, this.scoredFloat.Max, this.scoredFloat.Score);
     }
 }

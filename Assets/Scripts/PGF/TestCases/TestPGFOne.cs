@@ -1,17 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 public class TestPGFOne : MonoBehaviour {
 
     public static TestPGFOne Instance { get; private set; }
 
+    public UnityEvent<PGF> onSetCurrentPGF;
+
     public PGF Current
     {
         get
         {
             return currentPGF;
+        }
+        private set
+        {
+            currentPGF = value;
+
+            onSetCurrentPGF.Invoke(value);
         }
     }
 
