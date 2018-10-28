@@ -15,17 +15,22 @@ public class LinScoredFloat : IComparable
         {
             return value;
         }
-        private set
+        set
         {
             this.value = value;
         }
     }
 
+    public float Min { get; private set; }
+    public float Max { get; private set; }
     public float Score { get; private set; }
 
     public LinScoredFloat(float value, float min, float max, float idealValue)
     {
         this.Value = value;
+
+        this.Min = min;
+        this.Max = max;
 
         //The score is calculated by:
         //1) Find the larger distance between ideal and min and max and ideal.

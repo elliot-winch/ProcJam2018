@@ -6,6 +6,8 @@ using System;
 [RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour {
 
+    private const float minSpeedBeforeDetonation = 0.001f;
+
     //Calculated properties
     private float timeSinceCreation = 0.0f;
     private float distanceTravelled = 0.0f;
@@ -34,12 +36,8 @@ public class Projectile : MonoBehaviour {
         //Motion
         AddAdditionalForces(timeSinceCreation);
 
-        //Explosion checks
-        bool explodeByDistance = distanceTravelled >= Data.AreaDamage.maxDistanceBeforeDetonation.Value;
-        bool explodeByTime = timeSinceCreation >= Data.AreaDamage.timeToDetonate.Value;
-        bool explodeByLowSpeed = rb.velocity.magnitude >= Data.AreaDamage.minSpeedBeforeDetonation.Value;
-
-        if(explodeByDistance || explodeByLowSpeed || explodeByTime)
+        //When the prjectile stops moving, explode
+        if(rb.velocity.magnitude < minSpeedBeforeDetonation)
         {
             Explode();
         }
@@ -98,11 +96,7 @@ public class Projectile : MonoBehaviour {
         //the same dropoff ratio for one gun is the same for another (with a different initial speed)
         rb.AddForce(Vector3.down * Data.Trajectory.dropOffRatio.Value * Data.Trajectory.initialSpeed.Value);
 
-        //Bullet curve?
-
-        //Heat seeking?
-
-        //etc.
+        //Bullet curve, heat seeking etc.
     }
     
     #endregion

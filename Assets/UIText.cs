@@ -10,6 +10,12 @@ public static class UIText {
 	
 	// Update is called once per frame
     public static void Write (PGF current, TextMeshProUGUI description) {
+
+        if(description == null)
+        {
+            return;
+        }
+
         if (current != null && description != null){
             /*
             description.text = "";
