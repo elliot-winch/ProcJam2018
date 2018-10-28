@@ -57,14 +57,15 @@ public class TestPGFOne : MonoBehaviour {
         }
 
         //Fire
-        if (Input.GetMouseButtonDown(0)){
+        if (Input.GetMouseButtonDown(1)){
             Debug.Log("FIRE IN THE HOLE");
             currentPGF.Fire(transform.forward, transform.position);
         }
 
         //Reload
         if (Input.GetKeyDown(KeyCode.R))
-        {
+        {   //ammo.text = "RELOADING";
+
             currentPGF.Reload();
         }
 	}
@@ -73,8 +74,9 @@ public class TestPGFOne : MonoBehaviour {
     {
         if(currentPGF != null)
         {
-            Destroy(currentPGF);
+            Destroy(GameObject.FindGameObjectWithTag("Generated"));
         }
+
         foreach (GameObject x in GameObject.FindGameObjectsWithTag("Projectile"))
         {
             Destroy(x);

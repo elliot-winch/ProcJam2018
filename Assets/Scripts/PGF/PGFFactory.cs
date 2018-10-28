@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
-
+using TMPro;
 public class PGFFactory : MonoBehaviour{
 
     //Singleton
     public static PGFFactory Instance { get; private set; }
 
+    public TextMeshProUGUI ammo;
     //Assign singleton
     private void Awake()
     {
@@ -29,10 +30,11 @@ public class PGFFactory : MonoBehaviour{
             newPGF.transform.position = pgfStartTransform.position;
             newPGF.transform.forward = pgfStartTransform.forward;
             newPGF.transform.rotation = pgfStartTransform.rotation;
+
         }
 
         PGF pgf = newPGF.GetComponent<PGF>();
-
+        pgf.ammo = ammo;
         pgf.transform.SetParent(Camera.main.transform);
 
         pgf.Data = new PGFData()

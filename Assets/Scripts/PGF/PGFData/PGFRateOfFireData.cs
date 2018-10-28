@@ -61,8 +61,8 @@ public class PGFRateOfFireData : ScoreableData
 [Serializable]
 public class PGFBurstData : ScoreableData
 {
-    private const float MIN_BURST_SIZE = 5;
-    private const float MAX_BURST_SIZE = 100;
+    private const float MIN_BURST_SIZE = 15;
+    private const float MAX_BURST_SIZE = 50;
 
     public const float MIN_SECONDS_BETWEEN_SHOTS = 0.01F;
     public const float MAX_SECONDS_BETWEEN_SHOTS = 0.5F;

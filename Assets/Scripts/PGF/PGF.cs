@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using TMPro;
 public class PGF : MonoBehaviour
 {
     [Header("Projectile Spawning")]
@@ -10,11 +10,13 @@ public class PGF : MonoBehaviour
     [Tooltip("Where the projectile will spawn from and its initial direction (z-axis)")]
     public Transform barrelTip;
 
+    public TextMeshProUGUI ammo;
+
     //Data Properties
     //Generated and set by the factory
     public PGFData Data { get; set; }
 
-    private int currentAmmo; //Ammo remaining in the clip
+    public int currentAmmo; //Ammo remaining in the clip
 
     public bool CanFire
     {
@@ -57,9 +59,10 @@ public class PGF : MonoBehaviour
             //Controlling ROF
             //CUrrent ammo is decremented before being sent to GetWaitTime to avoid the off by one error
             currentAmmo--;
-
+            ammo.text = currentAmmo.ToString();
             if (currentAmmo <= 0)
             {
+                //ammo.text = "PRESS R TO RELOAD";
                 Reload();
             }
             else
@@ -132,12 +135,12 @@ public class PGF : MonoBehaviour
     private IEnumerator ReloadCo()
     {
         waitingForROF = true;
-
+        ammo.text = "Reloading";
         yield return new WaitForSeconds(Data.rateOfFire.reloadingData.r.Value);
 
         //for now, we are assuming the Overwatch model of ammo - infinte with reloads
         currentAmmo = (int)Data.rateOfFire.reloadingData.n.Value;
-
+        ammo.text = currentAmmo.ToString();
         waitingForROF = false;
     }
     #endregion
